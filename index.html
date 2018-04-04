@@ -2,70 +2,71 @@
 <html>
 
 <head>
-  <meta content="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="assets/bootstrap/bootstrap.min.css">
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Iceberg|Press+Start+2P|Wallpoet" rel="stylesheet">
-  <title>Code Breaker </title>
+    <meta content="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/bootstrap.min.css">
+    <link href="assets/font-awesome/fontawesome-all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Iceberg|Press+Start+2P|Wallpoet" rel="stylesheet">
+    <title>Code Breaker </title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h1 class="text-center">CODE BREAKER</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <h2 class="display-1 text-center" id="code">****</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-8 mb-20">
-        <div class="input-group">
-          <input type="number" name="number" id="your-guess" class="form-control" placeholder="Enter your guess..." aria-label="Enter your guess..." aria-describedby="basic-addon1">
+    <div id="main-card" class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="text-center">CODE BREAKER</h1>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-4">
-        <button id="submit-guess" type="button" class="btn btn-info btn-primary btn-lg btn-block" onclick="answerSubmit()">SUBMIT</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="alert alert-success alert-dismissible fade collapse" role="alert">
-          This is a success alert-check it out!
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="display-1 text-center" id="code">****</h2>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="warning" class="alert alert-warning alert-dismissible fade collapse" role="alert">
-          The integer you enter must be 4 digits long. Try again!
+        <div id="input-form" class="row">
+            <div class="col-sm-8 mb-20">
+                <div class="input-group">
+                    <input type="number" name="number" id="your-guess" class="form-control" placeholder="Enter a number..." aria-label="Enter a number..." aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <button id="submit-guess" type="button" class="btn btn-success btn-primary btn-lg btn-block">SUBMIT</button>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="results">
-      <div class="row">
-        <div class="col-sm-6">
-          Guess
+        <div id="alerts" class="row">
+            <div class="col-sm-9">
+                <div id="success" class="alert alert-success fade hide" role="alert">
+                    Congratulations you have broken the code!
+                </div>
+                <div id="game-over" class="alert alert-danger fade hide" role="alert">
+                    Game Over!
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button id="again" type="button" class="btn btn-info hide">Play Again!</button>
+            </div>
+            <div class="col-sm-12">
+                <div id="warning" class="alert alert-warning fade" role="alert">
+                    The integer you enter must be 4 digits long. Try again!
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6">
-          Result
+        <div id="results">
+            <div class="row">
+                <div class="col-sm-6">
+                    Guess
+                </div>
+                <div class="col-sm-6">
+                    Result
+                </div>
+            </div>
+            <hr>
         </div>
-      </div>
-      <hr>
     </div>
-  </div>
-  <script
-  src="http://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script type="text/javascript" src="main.js"></script>
-  <script type="text/javascript" src="assets/bootstrap/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/bootstrap.min.js"></script>
 </body>
 
 </html>
