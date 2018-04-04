@@ -76,6 +76,7 @@ function displayResults(userInput, gameNumber) {
     }
 
     html += '</div></div><hr>';
+
     return html;
 }
 
