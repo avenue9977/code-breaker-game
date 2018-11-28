@@ -1,7 +1,4 @@
-/*jshint esversion: 6 */
-
-let gameNumber,
-    guess = document.getElementById('your-guess'),
+let guess = document.getElementById('your-guess'),
     submit = document.getElementById('submit-guess'),
     results = document.getElementById('results'),
     hiddenCode = document.getElementById('code'),
@@ -13,13 +10,29 @@ let gameNumber,
     gameOverWarning = document.getElementById('game-over'),
     turns = 0;
 
-// initialize the game number
-gameNumber = generateFourRandomNumbers();
+// generate random 4 digits 
+// returns String
+const generateFourRandomNumbers = () => {
+    let number = Math.floor(Math.random() * 10000).toString();
+    if (number.length < 4) {
+        number = '0' + number;
+    }
+    return number;
+}
 
-function startTheGame() {
+// initialize the game number
+const gameNumber = generateFourRandomNumbers();
+
+const startTheGame = () => {
+
+    turns++;
+
+    if (turns >= 10) {
+        gameOver();
+    }
 
     // get input data
-    let userInput = guess.value;
+    const userInput = guess.value;
 
     // validate users input
     if (userInput === '' || userInput.length > 4 || userInput.length < 4) {
@@ -35,13 +48,6 @@ function startTheGame() {
         // display result
         results.innerHTML += html;
 
-        //count the turns
-        turns++;
-
-        if (turns >= 10) {
-            gameOver();
-        }
-
         // check if results win
         if (isWining()) {
             winTheGame();
@@ -50,20 +56,10 @@ function startTheGame() {
     }
 }
 
-// generate random 4 digits 
-// returns String
-function generateFourRandomNumbers() {
-    let number = Math.floor(Math.random() * 10000).toString();
-    if (number.length < 4) {
-        number = '0' + number;
-    }
-    return number;
-}
-
 // display the results to the user
 // returns String
-function displayResults(userInput, gameNumber) {
-    let html = '<div class="row"><div class="col-sm-6">' + userInput + '</div><div class="res col-sm-6">';
+const displayResults = (userInput, gameNumber) => {
+    let html = `<div class="row"><div class="col-sm-6">${userInput}</div><div class="res col-sm-6">`;
 
     for (var i = 0; i < 4; i++) {
         if (userInput.charAt(i) == gameNumber.charAt(i)) {
@@ -82,7 +78,7 @@ function displayResults(userInput, gameNumber) {
 
 // is the submited number equal to the game number
 // returns boolean
-function isWining() {
+const isWining = () => {
     if (answers.length > 0) {
         var correct = 0;
         for (var i = 0; i < 4; i++) {
@@ -101,7 +97,7 @@ function isWining() {
     }
 }
 
-function gameOver() {
+const gameOver = () => {
     gameOverWarning.classList.remove('hide');
     gameOverWarning.classList.add('show');
     playAgainButton.classList.remove('hide');
@@ -113,7 +109,7 @@ function gameOver() {
     submit.disabled = true;
 }
 
-function winTheGame() {
+const winTheGame = () => {
     inputForm.classList.add('hide');
     success.classList.add('show');
     success.classList.remove('hide');
@@ -124,7 +120,7 @@ function winTheGame() {
     hiddenCode.textContent = gameNumber;
 }
 
-playAgainButton.addEventListener('click', function() {
+playAgainButton.addEventListener('click', () => {
     window.location.reload();
 });
 
