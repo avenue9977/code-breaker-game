@@ -8,20 +8,20 @@ const answers = document.getElementsByClassName('res');
 const success = document.getElementById('success');
 const warning = document.getElementById('warning');
 const gameOverWarning = document.getElementById('game-over');
-let turns = 0;
 
 // generate random 4 digits 
-// returns String
+// returns Array of 4 elements
 const generateFourRandomNumbers = () => {
     let number = Math.floor(Math.random() * 10000).toString();
     if (number.length < 4) {
         number = '0' + number;
     }
-    return number;
+    return [...number];
 }
 
 // initialize the game number
 const gameNumber = generateFourRandomNumbers();
+let turns = 0;
 
 const startTheGame = () => {
 
@@ -33,6 +33,7 @@ const startTheGame = () => {
 
     // get input data
     const userInput = guess.value;
+    const userInputArray = [...userInput]
 
     // validate users input
     if (userInput === '' || userInput.length > 4 || userInput.length < 4) {
@@ -43,7 +44,7 @@ const startTheGame = () => {
         // hide warning if shown
         warning.classList.remove('show');
 
-        html = displayResults(userInput, gameNumber);
+        html = displayResults(userInputArray, gameNumber);
 
         // display result
         results.innerHTML += html;
@@ -58,12 +59,12 @@ const startTheGame = () => {
 // display the results to the user
 // returns String
 const displayResults = (userInput, gameNumber) => {
-    let html = `<div class="row"><div class="col-sm-6">${userInput}</div><div class="res col-sm-6">`;
+    let html = `<div class="row"><div class="col-sm-6">${userInput.join('')}</div><div class="res col-sm-6">`;
 
-    for (var i = 0; i < 4; i++) {
-        if (userInput.charAt(i) == gameNumber.charAt(i)) {
+    for (const [i, char] of gameNumber.entries()) {
+        if (char === userInput[i]) {
             html += '<i class="fas fa-check correct"></i>';
-        } else if (gameNumber.indexOf(userInput.charAt(i)) > -1) {
+        } else if (userInput.includes(char)) {
             html += '<i class="fas fa-retweet"></i>';
         } else {
             html += '<i class="fas fa-times"></i>';
@@ -104,7 +105,7 @@ const gameOver = () => {
     inputForm.classList.add('hide');
     code.style.animationName = "none";
     hiddenCode.style.color = "#dc3545";
-    hiddenCode.textContent = gameNumber;
+    hiddenCode.textContent = gameNumber.join('');
     submit.disabled = true;
 }
 
@@ -116,7 +117,7 @@ const winTheGame = () => {
     playAgainButton.classList.add('show');
     code.style.animationName = "none";
     hiddenCode.style.color = "#9EBF5C";
-    hiddenCode.textContent = gameNumber;
+    hiddenCode.textContent = gameNumber.join('');
 }
 
 playAgainButton.addEventListener('click', () => {
