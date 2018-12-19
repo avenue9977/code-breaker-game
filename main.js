@@ -1,13 +1,13 @@
-let guess = document.getElementById('your-guess');
-let submit = document.getElementById('submit-guess');
-let results = document.getElementById('results');
-let hiddenCode = document.getElementById('code');
-let playAgainButton = document.getElementById('again');
-let inputForm = document.getElementById('input-form');
-let answers = document.getElementsByClassName('res');
-let success = document.getElementById('success');
-let warning = document.getElementById('warning');
-let gameOverWarning = document.getElementById('game-over');
+const guess = document.getElementById('your-guess');
+const submit = document.getElementById('submit-guess');
+const results = document.getElementById('results');
+const hiddenCode = document.getElementById('code');
+const playAgainButton = document.getElementById('again');
+const inputForm = document.getElementById('input-form');
+const answers = document.getElementsByClassName('res');
+const success = document.getElementById('success');
+const warning = document.getElementById('warning');
+const gameOverWarning = document.getElementById('game-over');
 let turns = 0;
 
 // generate random 4 digits 
