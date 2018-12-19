@@ -1,14 +1,14 @@
-let guess = document.getElementById('your-guess'),
-    submit = document.getElementById('submit-guess'),
-    results = document.getElementById('results'),
-    hiddenCode = document.getElementById('code'),
-    playAgainButton = document.getElementById('again'),
-    inputForm = document.getElementById('input-form'),
-    answers = document.getElementsByClassName('res'),
-    success = document.getElementById('success'),
-    warning = document.getElementById('warning'),
-    gameOverWarning = document.getElementById('game-over'),
-    turns = 0;
+let guess = document.getElementById('your-guess');
+let submit = document.getElementById('submit-guess');
+let results = document.getElementById('results');
+let hiddenCode = document.getElementById('code');
+let playAgainButton = document.getElementById('again');
+let inputForm = document.getElementById('input-form');
+let answers = document.getElementsByClassName('res');
+let success = document.getElementById('success');
+let warning = document.getElementById('warning');
+let gameOverWarning = document.getElementById('game-over');
+let turns = 0;
 
 // generate random 4 digits 
 // returns String
@@ -52,7 +52,6 @@ const startTheGame = () => {
         if (isWining()) {
             winTheGame();
         }
-
     }
 }
 
