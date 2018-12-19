@@ -2,6 +2,10 @@
 
 Simple Code Breaker game made with pure JavaScript.
 
+## Start the game
+
+Open the **index.html** file.
+
 ## Instructions
 
 You need to guess the 4 digit code. When you make an attempt, the game will show your guess and also how your guess compares with the hidden code. 
