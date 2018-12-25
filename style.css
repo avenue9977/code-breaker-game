@@ -1,15 +1,10 @@
 html {
     height: 100% !important;
-    background: #667db6;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ededed;
 }
 
 body {
-    font-family: 'Press Start 2P', cursive !important;
+    font-family: 'Comfortaa', cursive !important;
     margin: 60px 0 !important;
     background-color: transparent !important;
 }
@@ -44,7 +39,8 @@ i {
 #main-card {
     padding: 30px;
     background-color: #fcfcfc;
-    border: 10px solid #ededed;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px 8px #cecece;
 }
 
 #code {
@@ -89,6 +85,7 @@ i {
     from {
         color: #333333;
     }
+
     to {
         color: #EB3349;
     }
@@ -98,6 +95,7 @@ i {
     .mb-20 {
         margin-bottom: 20px;
     }
+
     #main-card {
         padding: 15px;
     }
