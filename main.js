@@ -63,11 +63,11 @@ const displayResults = (userInput, gameNumber) => {
 
     for (const [i, char] of gameNumber.entries()) {
         if (char === userInput[i]) {
-            html += '<i class="fas fa-check correct"></i>';
+            html += '<i class="material-icons check">check</i>';
         } else if (userInput.includes(char)) {
-            html += '<i class="fas fa-retweet"></i>';
+            html += '<i class="material-icons refresh">refresh</i>';
         } else {
-            html += '<i class="fas fa-times"></i>';
+            html += '<i class="material-icons again">close</i>';
         }
     }
 

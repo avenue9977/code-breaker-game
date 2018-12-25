@@ -69,15 +69,15 @@ i {
     display: none !important;
 }
 
-.fa-check {
+i.check {
     color: #9EBF5C;
 }
 
-.fa-retweet {
+i.refresh {
     color: #EFAC19;
 }
 
-.fa-times {
+i.again {
     color: #E84545;
 }
 
