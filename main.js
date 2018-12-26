@@ -47,7 +47,9 @@ const startTheGame = () => {
         html = displayResults(userInputArray, gameNumber);
 
         // display result
-        results.innerHTML += html;
+        const hr = document.createElement('hr');
+        results.append(html);
+        results.append(hr);
 
         // check if results win
         if (isWining()) {
@@ -56,24 +58,42 @@ const startTheGame = () => {
     }
 }
 
-// display the results to the user
-// returns String
 const displayResults = (userInput, gameNumber) => {
-    let html = `<div class="row"><div class="col-sm-6">${userInput.join('')}</div><div class="res col-sm-6">`;
+    const row = document.createElement('div');
+    row.classList.add('row');
+
+    const leftColumn = document.createElement('div');
+    leftColumn.classList.add('col-sm-6');
+    leftColumn.innerHTML = userInput.join('');
+
+    const rightColumn = document.createElement('div');
+    rightColumn.classList.add('res', 'col-sm-6');
 
     for (const [i, char] of gameNumber.entries()) {
         if (char === userInput[i]) {
-            html += '<i class="material-icons check">check</i>';
+            const icon = document.createElement('i');
+            icon.classList.add('material-icons');
+            icon.classList.add('check');
+            icon.textContent = 'check';
+            rightColumn.appendChild(icon);
         } else if (userInput.includes(char)) {
-            html += '<i class="material-icons refresh">refresh</i>';
+            const icon = document.createElement('i');
+            icon.classList.add('material-icons');
+            icon.classList.add('refresh');
+            icon.textContent = 'refresh';
+            rightColumn.appendChild(icon);
         } else {
-            html += '<i class="material-icons again">close</i>';
+            const icon = document.createElement('i');
+            icon.classList.add('material-icons');
+            icon.classList.add('again');
+            icon.textContent = 'close';
+            rightColumn.appendChild(icon);
         }
     }
 
-    html += '</div></div><hr>';
-
-    return html;
+    row.appendChild(leftColumn);
+    row.appendChild(rightColumn);
+    return row;
 }
 
 // is the submited number equal to the game number
