@@ -9,110 +9,132 @@ const success = document.getElementById('success');
 const warning = document.getElementById('warning');
 const gameOverWarning = document.getElementById('game-over');
 
-// generate random 4 digits 
-// returns Array of 4 elements
+/* 
+    Generate random 4 digits 
+    Returns Array of 4 elements
+*/
 const generateFourRandomNumbers = () => {
     let number = Math.floor(Math.random() * 10000).toString();
-    if (number.length < 4) {
-        number = '0' + number;
-    }
+
+    if (number.length < 4) number = `0${number}`;
+
     return [...number];
 }
 
-// initialize the game number
+// Initialize the game number
 const gameNumber = generateFourRandomNumbers();
 let turns = 0;
 
 const startTheGame = () => {
-
     turns++;
 
-    if (turns >= 10) {
-        gameOver();
-    }
+    if (turns >= 10) gameOver(); // Check for max turns exceeded
 
-    // get input data
+    // Get input data
     const userInput = guess.value;
-    const userInputArray = [...userInput]
+    const isUserInputValid =  validateInput(userInput); // Validate user input
 
-    // validate users input
-    if (userInput === '' || userInput.length > 4 || userInput.length < 4) {
-        // show warning
-        warning.classList.add('show');
+    if (isUserInputValid) {
+        const userInputArray = [...userInput];
 
-    } else {
-        // hide warning if shown
+        // Hide warning if shown
         warning.classList.remove('show');
 
-        html = displayResults(userInputArray, gameNumber);
-
-        // display result
+        // Generate HTML
+        const html = genrateResultsHTML(userInputArray, gameNumber);
         const hr = document.createElement('hr');
+        
+        // Display result
         results.append(html);
         results.append(hr);
 
-        // check if results win
-        if (isWining()) {
-            winTheGame();
-        }
+        // check if result is a win
+        if (isWining()) winTheGame();
+        
+        return;
+    }
+
+    // Show warning
+    warning.classList.add('show');
+}
+
+// Validates the user input
+const validateInput = (input) => !(input === '' || input.length > 4 || input.length < 4);
+
+// Generates a HTML that holds the result
+const genrateResultsHTML = (userInput) => {
+    if (userInput) {
+        // Create <div class="row"></div>
+        const row = document.createElement('div');
+        row.classList.add('row');
+
+        // Create <div class="col-sm-6">{userInput}</div>
+        const leftColumn = document.createElement('div');
+        leftColumn.classList.add('col-sm-6');
+        leftColumn.innerHTML = userInput.join('');
+
+        // Create <div class="res col-sm-6"></div>
+        const rightColumn = document.createElement('div');
+        rightColumn.classList.add('res', 'col-sm-6');
+
+        const resultsColumn = generateResultsIconsHTML(rightColumn, userInput);
+
+        // Adds 
+        row.appendChild(leftColumn);
+        row.appendChild(resultsColumn);
+
+        return row;
     }
 }
 
-const displayResults = (userInput, gameNumber) => {
-    const row = document.createElement('div');
-    row.classList.add('row');
+const generateResultsIconsHTML = (htmlElement, userInput) => {
 
-    const leftColumn = document.createElement('div');
-    leftColumn.classList.add('col-sm-6');
-    leftColumn.innerHTML = userInput.join('');
+    if (htmlElement && userInput && userInput.length > 0) {
 
-    const rightColumn = document.createElement('div');
-    rightColumn.classList.add('res', 'col-sm-6');
-
-    for (const [i, char] of gameNumber.entries()) {
-        if (char === userInput[i]) {
-            const icon = document.createElement('i');
-            icon.classList.add('material-icons');
-            icon.classList.add('check');
-            icon.textContent = 'check';
-            rightColumn.appendChild(icon);
-        } else if (userInput.includes(char)) {
-            const icon = document.createElement('i');
-            icon.classList.add('material-icons');
-            icon.classList.add('refresh');
-            icon.textContent = 'refresh';
-            rightColumn.appendChild(icon);
-        } else {
-            const icon = document.createElement('i');
-            icon.classList.add('material-icons');
-            icon.classList.add('again');
-            icon.textContent = 'close';
-            rightColumn.appendChild(icon);
+        for (const [i, char] of userInput.entries()) {
+            if (char === gameNumber[i]) {
+                const icon = document.createElement('i');
+                icon.classList.add('material-icons');
+                icon.classList.add('check', 'correct');
+                icon.textContent = 'check';
+                htmlElement.appendChild(icon);
+            } else if (gameNumber.includes(char)) {
+                const icon = document.createElement('i');
+                icon.classList.add('material-icons');
+                icon.classList.add('refresh');
+                icon.textContent = 'refresh';
+                htmlElement.appendChild(icon);
+            } else {
+                const icon = document.createElement('i');
+                icon.classList.add('material-icons');
+                icon.classList.add('again');
+                icon.textContent = 'close';
+                htmlElement.appendChild(icon);
+            }
         }
+
+        return htmlElement;
     }
 
-    row.appendChild(leftColumn);
-    row.appendChild(rightColumn);
-    return row;
+    return '';
 }
 
-// is the submited number equal to the game number
-// returns boolean
+/* 
+    Is the submited number equal to the game number
+    Returns boolean
+*/
 const isWining = () => {
     if (answers.length > 0) {
-        var correct = 0;
-        for (var i = 0; i < 4; i++) {
-            // always check the last item in the answers array
-            var correctAnswer = answers[answers.length - 1].children[i].className.includes("correct");
+        let correct = 0;
 
-            if (correctAnswer) {
-                correct++;
-            }
+        for (let i = 0; i < 4; i++) {
+            const correctAnswer = answers[answers.length - 1].children[i].className.includes("correct"); // Always check the last item in the answers array
 
-            if (correct === 4) {
-                return true;
-            }
+            if (correctAnswer) correct++;
+
+            if (correct === 4) return true;
         }
+
         return false;
     }
 }
